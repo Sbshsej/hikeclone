@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat</title>
+  <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+  <script defer src="./client.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <section style="background-color: #eee;">
+    <div class="container py-5">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-6">
+          <div class="card" id="chat2">
+            <div class="card-header d-flex justify-content-between align-items-center p-3">
+              <h5 class="mb-0">Chat</h5>
+              <button type="button" class="btn btn-primary btn-sm">Let's Chat App</button>
+            </div>
+            <div class="card-body" style="position: relative; height: 400px; overflow-y: auto;">
+              <!-- Messages will be appended here -->
+            </div>
+            <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
+                alt="avatar 3" style="width: 40px; height: auto;">
+              <form id="chat-form" class="d-flex align-items-center w-100 ms-3">
+                <input type="text" class="form-control form-control-lg" id="msg" placeholder="Type message">
+                <button type="submit" class="btn btn-primary btn-lg ms-2">Send</button>
+              </form>
+              <script>
+                    const socket = io('http://localhost:3000');
+
+                document.getElementById('submit').addEventListener('click', function() {
+                    var msg = document.getElementById('msg').value;
+                    if (msg) {
+                        var msgDiv = document.createElement('div');
+                        msgDiv.className = 'alert alert-primary mt-2';
+                        msgDiv.textContent = msg;
+                        document.getElementById('messages').appendChild(msgDiv);
+                        document.getElementById('msg').value = '';
+                    }
+                });
+            </script>
+        
+              <a class="ms-1 text-muted" href="#!"><i class="fas fa-paperclip"></i></a>
+              <a class="ms-3 text-muted" href="#!"><i class="fas fa-smile"></i></a>
+              <a class="ms-3" href="#!"><i class="fas fa-paper-plane"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
